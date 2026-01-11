@@ -93,16 +93,20 @@ src/llm/prompts/
 
 Controlled via USE_LLM environment variable
 
-RAG (Stub)
+RAG (Wiki Integration)
 
 Located in:
 
 src/rag/
 
 
-Vector store, ingestion, and retrieval are stubbed
+Features:
+- Wiki client support (Confluence, MediaWiki, Generic REST API)
+- ChromaDB vector store with sentence-transformers embeddings
+- Automatic text extraction and chunking
+- Field-specific query retrieval
 
-Host tool is expected to plug in its own RAG implementation
+See WIKI_RAG_SETUP.md for detailed usage instructions.
 
 Scoring Engine
 

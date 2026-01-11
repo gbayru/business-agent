@@ -1,1 +1,4 @@
 python-docx
+requests
+chromadb
+sentence-transformers

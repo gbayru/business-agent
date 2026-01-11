@@ -13,6 +13,8 @@ from ..scoring.scoring_engine_final import (
     get_weak_fields,
     resolve_questions,
 )
+from ..rag.retriever import retrieve_snippets
+from ..rag.index import VectorStore
 
 # -----------------------------
 # LLM Switch (Demo-safe)
@@ -144,8 +146,23 @@ def handle_user_message(
         set_answer(state, question_id, user_text)
 
     # 2) normalize answer (LLM or stub)
-    # rag_snippets = retrieve_snippets(current_field, state.rag_index_id, vector_store)
-    norm = normalize_answer(current_field, user_text, state.fields, rag_snippets=[])
+    # Retrieve RAG snippets if index exists
+    rag_snippets = []
+    if state.rag_index_id:
+        try:
+            vector_store = VectorStore()
+            rag_snippets = retrieve_snippets(
+                current_field, 
+                state.rag_index_id, 
+                vector_store,
+                top_k=3
+            )
+        except Exception as e:
+            # Silently fail if RAG retrieval fails (demo-safe)
+            print(f"RAG retrieval failed: {e}")
+            rag_snippets = []
+    
+    norm = normalize_answer(current_field, user_text, state.fields, rag_snippets=rag_snippets)
 
     needs = bool(norm.get("needs_clarification", False))
     followup = norm.get("followup_question")
