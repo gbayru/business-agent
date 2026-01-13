@@ -11,11 +11,11 @@ Bu kılavuz, wiki sayfalarından doküman çekip RAG sistemine ekleme işlemini 
 pip install -r requirements.txt
 ```
 
-## Wiki Türleri
+## Wiki Türü
 
-Sistem üç farklı wiki türünü destekler:
+Sistem Confluence wiki'yi destekler:
 
-### 1. Confluence (Atlassian)
+### Confluence (Atlassian)
 
 En yaygın kurumsal wiki çözümü.
 
@@ -45,42 +45,6 @@ result = add_wiki_documents(
 2. https://id.atlassian.com/manage-profile/security/api-tokens
 3. "Create API token" butonuna tıklayın
 4. Token'ı kopyalayın
-
-### 2. MediaWiki
-
-Wikipedia ve birçok özel wiki MediaWiki kullanır.
-
-**Kullanım:**
-
-```python
-result = add_wiki_documents(
-    session_id="your-session-id",
-    wiki_type="mediawiki",
-    base_url="https://wiki.example.com/w/api.php",
-    limit=100
-)
-```
-
-**Opsiyonel Parametreler:**
-- `namespace`: Namespace ID (0 = ana sayfalar, 2 = kullanıcı sayfaları)
-- `category`: Belirli bir kategoriden sayfalar
-
-### 3. Generic REST API
-
-Özel wiki veya REST API kullanan sistemler için.
-
-**Kullanım:**
-
-```python
-result = add_wiki_documents(
-    session_id="your-session-id",
-    wiki_type="generic",
-    base_url="https://wiki.example.com/api",
-    headers={"Authorization": "Bearer your-token"},
-    page_endpoint="/pages",  # İsteğe bağlı
-    text_field="content"  # İsteğe bağlı
-)
-```
 
 ## Adım Adım Kullanım
 

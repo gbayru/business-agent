@@ -101,7 +101,7 @@ src/rag/
 
 
 Features:
-- Wiki client support (Confluence, MediaWiki, Generic REST API)
+- Wiki client support (Confluence)
 - ChromaDB vector store with sentence-transformers embeddings
 - Automatic text extraction and chunking
 - Field-specific query retrieval
